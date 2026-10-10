@@ -185,10 +185,10 @@ class PathParser {
     if (!pathname || pathname === '/') {
       markdownUrl = 'README.md';
     } else if (pathname.startsWith('/list/')) {
-      const result = PathParser.match('/list/:channel')
-      if (result) {
-        markdownUrl = '/list/' + result.params.channel + '.md';
-      }      
+      const channelPath = pathname.slice('/list/'.length).replace(/^\/+|\/+$/g, '');
+      if (channelPath) {
+        markdownUrl = '/list/' + channelPath + '.md';
+      }
     }
     if (!markdownUrl) {
     	return false;
